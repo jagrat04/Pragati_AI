@@ -5,7 +5,7 @@ import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 
 const Dashboard = () => {
-  // 🟢 Input Variables (Structured for API Integration Later)
+  // 🟢 State Variables
   const [data, setData] = useState({
     temperature: 28,
     soilMoisture: 55,
@@ -13,10 +13,9 @@ const Dashboard = () => {
     windSpeed: 10,
     rainfall: [15, 18, 20, 22, 24, 25, 27],
     cropHealth: "Healthy 🌱",
-    soilPH: 6.5,
     sunlight: 6,
-    marketPrice: { wheat: 1800, rice: 2200 },
-    pestAlert: "No Alert ✅",
+    marketPrice: { wheat: 1800, rice: 2200, maize: 2000, barley: 1600 },
+    selectedCrop: "wheat",
     fertilizer: "Organic Compost",
     irrigation: "Irrigation Needed 🚰",
   });
@@ -42,14 +41,13 @@ const Dashboard = () => {
             Math.max(10, Math.min(40, prev.rainfall[prev.rainfall.length - 1] + (Math.random() * 3 - 1.5))).toFixed(1)
           ),
         ],
-        soilPH: parseFloat((prev.soilPH + (Math.random() * 0.2 - 0.1)).toFixed(2)),
         sunlight: parseFloat(Math.max(4, Math.min(12, prev.sunlight + (Math.random() * 2 - 1))).toFixed(1)),
         marketPrice: {
           wheat: parseInt(Math.max(1500, Math.min(2500, prev.marketPrice.wheat + (Math.random() * 100 - 50)))),
           rice: parseInt(Math.max(1800, Math.min(2800, prev.marketPrice.rice + (Math.random() * 100 - 50)))),
+          maize: parseInt(Math.max(1700, Math.min(2300, prev.marketPrice.maize + (Math.random() * 100 - 50)))),
+          barley: parseInt(Math.max(1400, Math.min(2000, prev.marketPrice.barley + (Math.random() * 100 - 50)))),
         },
-        pestAlert: Math.random() > 0.85 ? "High Risk 🚨" : "No Alert ✅",
-        fertilizer: prev.soilPH < 5.5 ? "Lime" : prev.soilPH > 7.5 ? "Sulfur" : "Organic Compost",
         irrigation: prev.soilMoisture < 50 ? "Irrigation Needed 🚰" : "Sufficient Moisture ✅",
       }));
     };
@@ -69,11 +67,8 @@ const Dashboard = () => {
         <DataCard title="💨 Humidity" value={`${data.humidity}%`} />
         <DataCard title="🌬 Wind Speed" value={`${data.windSpeed} km/h`} />
         <DataCard title="🌱 Crop Health" value={data.cropHealth} highlight />
-        <DataCard title="⚖ Soil pH Level" value={`${data.soilPH}`} />
         <DataCard title="🌞 Sunlight Exposure" value={`${data.sunlight} hours`} />
-        <DataCard title="🚨 Pest Alert" value={data.pestAlert} highlight={data.pestAlert.includes("High")} />
-        <DataCard title="💰 Market Price (Wheat)" value={`₹${data.marketPrice.wheat} per quintal`} />
-        <DataCard title="💰 Market Price (Rice)" value={`₹${data.marketPrice.rice} per quintal`} />
+        <MarketPriceCard data={data} setData={setData} />
         <DataCard title="🌿 Fertilizer Recommendation" value={data.fertilizer} />
         <DataCard title="🚰 Irrigation Suggestion" value={data.irrigation} />
       </div>
@@ -100,6 +95,27 @@ const Dashboard = () => {
   );
 };
 
+// 🟢 Market Price Component with Dropdown
+const MarketPriceCard = ({ data, setData }) => {
+  return (
+    <div style={cardStyle}>
+      <h3 style={{ margin: "0", fontSize: "18px", color: "#444" }}>💰 Market Price</h3>
+      <select
+        style={dropdownStyle}
+        value={data.selectedCrop}
+        onChange={(e) => setData((prev) => ({ ...prev, selectedCrop: e.target.value }))}
+      >
+        {Object.keys(data.marketPrice).map((crop) => (
+          <option key={crop} value={crop}>
+            {crop.charAt(0).toUpperCase() + crop.slice(1)}
+          </option>
+        ))}
+      </select>
+      <p style={dataStyle}>₹{data.marketPrice[data.selectedCrop]} per quintal</p>
+    </div>
+  );
+};
+
 // 🟢 Reusable Data Card Component
 const DataCard = ({ title, value, highlight }) => {
   return (
@@ -111,6 +127,12 @@ const DataCard = ({ title, value, highlight }) => {
 };
 
 // 🌿 Styles
+const dropdownStyle = {
+  padding: "5px",
+  fontSize: "16px",
+  marginBottom: "5px",
+};
+
 const containerStyle = {
   padding: "20px",
   fontFamily: "Arial, sans-serif",
@@ -128,16 +150,12 @@ const titleStyle = {
   color: "#2d6a4f",
   fontSize: "32px",
   fontWeight: "bold",
-  width: "100%",
 };
 
 const gridStyle = {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
   gap: "20px",
-  width: "90%",
-  maxWidth: "1200px",
-  padding: "10px",
 };
 
 const cardStyle = {
@@ -146,7 +164,6 @@ const cardStyle = {
   borderRadius: "10px",
   textAlign: "center",
   backgroundColor: "#fff",
-  boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
 };
 
 const dataStyle = {
@@ -156,18 +173,21 @@ const dataStyle = {
 };
 
 const chartContainerStyle = {
-  marginTop: "30px",
+  width: "80%",
+  maxWidth: "600px",
+  marginTop: "20px",
   padding: "20px",
-  border: "1px solid #ddd",
-  borderRadius: "10px",
   backgroundColor: "#fff",
-  width: "90%",
-  maxWidth: "1200px",
+  borderRadius: "10px",
+  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+  textAlign: "center",
 };
 
 const chartTitleStyle = {
+  textAlign: "center",
+  fontSize: "20px",
+  color: "#333",
   marginBottom: "10px",
-  color: "#444",
 };
 
 export default Dashboard;
