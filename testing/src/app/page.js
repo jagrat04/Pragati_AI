@@ -38,9 +38,9 @@ export default function Home() {
 
       {/* Image or Illustration */}
       <img
-        src="https://source.unsplash.com/800x400/?farm,agriculture"
+        src="https://images.unsplash.com/photo-1535379453347-1ffd615e2e08?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt="Agriculture"
-        className="mt-8 rounded-lg shadow-md"
+        className="mt-8 rounded-lg shadow-md h-[500px] w-[600px]"
       />
     </div>
   );
