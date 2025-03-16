@@ -26,19 +26,27 @@ const Dashboard = () => {
     const fetchData = () => {
       setData((prev) => ({
         ...prev,
-        temperature: parseFloat(prev.temperature) + (Math.random() * 1.5 - 0.8),
-        soilMoisture: Math.max(40, Math.min(80, prev.soilMoisture + (Math.random() * 3 - 1.5))),
-        humidity: Math.max(50, Math.min(85, prev.humidity + (Math.random() * 2 - 1))),
-        windSpeed: Math.max(2, Math.min(15, prev.windSpeed + (Math.random() * 2 - 1))),
+        temperature: parseFloat((prev.temperature + (Math.random() * 1.5 - 0.8)).toFixed(1)),
+        soilMoisture: parseFloat(
+          Math.max(40, Math.min(80, prev.soilMoisture + (Math.random() * 3 - 1.5))).toFixed(1)
+        ),
+        humidity: parseFloat(
+          Math.max(50, Math.min(85, prev.humidity + (Math.random() * 2 - 1))).toFixed(1)
+        ),
+        windSpeed: parseFloat(
+          Math.max(2, Math.min(15, prev.windSpeed + (Math.random() * 2 - 1))).toFixed(1)
+        ),
         rainfall: [
           ...prev.rainfall.slice(1),
-          Math.max(10, Math.min(40, prev.rainfall[prev.rainfall.length - 1] + (Math.random() * 3 - 1.5))),
+          parseFloat(
+            Math.max(10, Math.min(40, prev.rainfall[prev.rainfall.length - 1] + (Math.random() * 3 - 1.5))).toFixed(1)
+          ),
         ],
-        soilPH: parseFloat((prev.soilPH + (Math.random() * 0.2 - 0.1)).toFixed(1)),
-        sunlight: Math.max(4, Math.min(12, prev.sunlight + (Math.random() * 2 - 1))),
+        soilPH: parseFloat((prev.soilPH + (Math.random() * 0.2 - 0.1)).toFixed(2)),
+        sunlight: parseFloat(Math.max(4, Math.min(12, prev.sunlight + (Math.random() * 2 - 1))).toFixed(1)),
         marketPrice: {
-          wheat: Math.max(1500, Math.min(2500, prev.marketPrice.wheat + (Math.random() * 100 - 50))),
-          rice: Math.max(1800, Math.min(2800, prev.marketPrice.rice + (Math.random() * 100 - 50))),
+          wheat: parseInt(Math.max(1500, Math.min(2500, prev.marketPrice.wheat + (Math.random() * 100 - 50)))),
+          rice: parseInt(Math.max(1800, Math.min(2800, prev.marketPrice.rice + (Math.random() * 100 - 50)))),
         },
         pestAlert: Math.random() > 0.85 ? "High Risk 🚨" : "No Alert ✅",
         fertilizer: prev.soilPH < 5.5 ? "Lime" : prev.soilPH > 7.5 ? "Sulfur" : "Organic Compost",
@@ -46,7 +54,7 @@ const Dashboard = () => {
       }));
     };
 
-    const interval = setInterval(fetchData, 5000);
+    const interval = setInterval(fetchData, 50000);
     return () => clearInterval(interval);
   }, []);
 
@@ -56,7 +64,7 @@ const Dashboard = () => {
 
       {/* Grid Layout for Key Data */}
       <div style={gridStyle}>
-        <DataCard title="🌡 Temperature" value={`${data.temperature.toFixed(1)}°C`} />
+        <DataCard title="🌡 Temperature" value={`${data.temperature}°C`} />
         <DataCard title="💧 Soil Moisture" value={`${data.soilMoisture}%`} />
         <DataCard title="💨 Humidity" value={`${data.humidity}%`} />
         <DataCard title="🌬 Wind Speed" value={`${data.windSpeed} km/h`} />
