@@ -41,7 +41,7 @@ Regularly check your plants for any new signs of infection. If more black rot le
 
   return (
     <div className="bg-white shadow-md rounded-lg p-4 text-black " style={{ textAlign: "center", padding: "20px" , marginTop: "25px"}}>
-         <h2 className="text-2xl font-semibold mb-2">Crop image CNN analasys for pest and deficiency</h2>
+         <h2 className="text-2xl font-semibold mb-2">Crop image CNN analasys for pest and deficiency detection</h2>
       {/* <h2 className="text-black">Upload an Image of crop for analasys</h2> */}
       <input type="file" accept="image/*" onChange={handleImageUpload} className=" text-black" />
 
