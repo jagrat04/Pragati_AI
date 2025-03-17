@@ -11,14 +11,14 @@ export default function Team() {
     },
     {
       name: "Jagrat",
-      role: "Product Designer",
+      role: "Devops/ML Designer",
       image: "https://raw.githubusercontent.com/jagrat04/tempo/refs/heads/main/Jagrat.jpg", 
       linkedin: "https://linkedin.com/in/jagrat", 
       github: "https://github.com/jagrat",
     },
     {
       name: "Karan",
-      role: "DevOps Engineer",
+      role: "ML Engineer",
       image: "https://raw.githubusercontent.com/jagrat04/tempo/refs/heads/main/Karan.jpg",
       linkedin: "https://linkedin.com/in/karan",
       github: "https://github.com/karan",

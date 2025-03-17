@@ -10,7 +10,7 @@ const Features = () => {
     const fetchWeather = async () => {
       try {
         const res = await fetch(
-          `https://api.weatherapi.com/v1/current.json?key=acbdcac990e84326a36204946251203&q=Delhi`
+          `https://api.weatherapi.com/v1/current.json?key=acbdcac990e84326a36204946251203&q=Delhi,India`
         );
         const data = await res.json();
         setWeather(data);
