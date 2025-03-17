@@ -3,26 +3,33 @@ import MemberCard from "./components/card";
 export default function Team() {
   const members = [
     {
-      name: "John Doe",
+      name: "Aakash",
       role: "Software Engineer",
-      image: "https://via.placeholder.com/100",
-      linkedin: "https://linkedin.com/in/johndoe",
-      github: "https://github.com/johndoe",
+      image: "/Aakash.jpg", // Assuming Aakash.jpg is in the public folder
+      linkedin: "https://linkedin.com/in/aakash", // Replace with actual LinkedIn
+      github: "https://github.com/aakash", // Replace with actual GitHub
     },
     {
-      name: "Jane Smith",
+      name: "Jagrat",
       role: "Product Designer",
-      image: "https://via.placeholder.com/100",
-      linkedin: "https://linkedin.com/in/janesmith",
-      github: "https://github.com/janesmith",
+      image: "/Jagrat.jpg", 
+      linkedin: "https://linkedin.com/in/jagrat", 
+      github: "https://github.com/jagrat",
     },
     {
-      name: "Mike Johnson",
+      name: "Karan",
       role: "DevOps Engineer",
-      image: "https://via.placeholder.com/100",
-      linkedin: "https://linkedin.com/in/mikejohnson",
-      github: "https://github.com/mikejohnson",
+      image: "/Karan.jpg",
+      linkedin: "https://linkedin.com/in/karan",
+      github: "https://github.com/karan",
     },
+    {
+      name: "Rudra",
+      role: "Team Lead",
+      image: "/Rudra.jpg",
+      linkedin: "https://linkedin.com/in/rudra",
+      github: "https://github.com/rudra",
+    }
   ];
 
   return (
