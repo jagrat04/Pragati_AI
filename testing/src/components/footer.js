@@ -9,8 +9,8 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-4">Useful Links</h3>
           <Link href="/" className="block text-sm mb-2 hover:underline">Home</Link>
-          <Link href="/features" className="block text-sm mb-2 hover:underline">Features</Link>
-          <Link href="/dashboard" className="block text-sm mb-2 hover:underline">Dashboard</Link>
+          <Link href="/Features" className="block text-sm mb-2 hover:underline">Features</Link>
+          <Link href="/dashboard" className="block text-sm mb-2 hover:underline">Dashboard</Link>gi
           <Link href="/about" className="block text-sm hover:underline">About</Link>
         </div>
 
