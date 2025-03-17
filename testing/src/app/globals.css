@@ -105,3 +105,44 @@ body {
   background-color: white;
   text-align: center;
 }
+
+.card {
+  width: 250px;
+  height: 400px;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto; 
+}
+
+.social-links a {
+  margin: 5px;
+  text-decoration: none;
+  color: #0073b1;
+  font-weight: bold;
+}
+
+.social-links a:hover {
+  text-decoration: underline;
+}
+
+.team-container {
+  display: flex;
+  gap: 20px; /* Adds space between cards */
+  justify-content: center; /* Center horizontally */
+  flex-wrap: wrap; /* For responsiveness */
+}
