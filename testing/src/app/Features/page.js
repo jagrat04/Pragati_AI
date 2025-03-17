@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import CNNInputField from "./components/input";
 
 const Features = () => {
   const [weather, setWeather] = useState(null);
@@ -37,7 +38,7 @@ const Features = () => {
           <p>Loading weather data...</p>
         )}
       </div>
-      
+      <CNNInputField />
       {/* More Features will go here */}
     </div>
   );
