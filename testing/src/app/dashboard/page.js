@@ -11,12 +11,12 @@ const Dashboard = () => {
     humidity: 70,
     windSpeed: 10,
     rainfall: [15, 18, 20, 22, 24, 25, 27],
-    cropHealth: "Healthy 🌱",
+    cropHealth: "Healthy ",
     sunlight: 6,
     marketPrice: { wheat: 1800, rice: 2200, maize: 2000, barley: 1600 },
     selectedCrop: "wheat",
     fertilizer: "Organic Compost",
-    irrigation: "Irrigation Needed 🚰",
+    irrigation: "Irrigation Needed ",
   });
 
   useEffect(() => {
@@ -49,19 +49,19 @@ const Dashboard = () => {
       <h1 style={titleStyle}>🌾 Smart Agriculture Dashboard</h1>
 
       <div style={gridStyle}>
-        <DataCard title="🌡️ Temp" value={`${data.temperature}°C`} icon="🌡️" gridArea="temperature" gradient="linear-gradient(135deg, #fceabb, #f8b500)" />
-        <DataCard title="💧 Soil" value={`${data.soilMoisture}%`} icon="💧" gridArea="soilMoisture" gradient="linear-gradient(135deg, #a8edea, #fed6e3)" />
-        <DataCard title="💨 Humid" value={`${data.humidity}%`} icon="💨" gridArea="humidity" gradient="linear-gradient(135deg, #e0c3fc, #8ec5fc)" />
-        <DataCard title="🌬️ Wind" value={`${data.windSpeed} km/h`} icon="🌬️" gridArea="windSpeed" gradient="linear-gradient(135deg, #c2e59c, #64b3f4)" />
-        <DataCard title="🌱 Health" value={data.cropHealth} highlight icon="🌱" gridArea="cropHealth" gradient="linear-gradient(135deg, #f6d365, #fda085)" />
-        <DataCard title="🌞 Light" value={`${data.sunlight} hrs`} icon="🌞" gridArea="sunlight" gradient="linear-gradient(135deg, #ffecd2, #fcb69f)" />
+        <DataCard title=" Temp" value={`${data.temperature}°C`} icon="https://w7.pngwing.com/pngs/190/259/png-transparent-digital-thermometer-displaying-37-medical-thermometers-infrared-thermometers-temperature-mercury-in-glass-thermometer-thermometer-miscellaneous-measurement-medical-thermometers.png" gridArea="temperature" gradient="linear-gradient(135deg, #fceabb, #f8b500)" />
+        <DataCard title=" Soil Moisture" value={`${data.soilMoisture}%`} icon="https://www.citypng.com/public/uploads/preview/png-water-realistic-droplets-drops-704081694963422zlbolisjhv.png" gridArea="soilMoisture" gradient="linear-gradient(135deg, #a8edea, #fed6e3)" />
+        <DataCard title=" Humid" value={`${data.humidity}%`} icon="4e6e4d51fc758c8e501b5040380150aa9565c2076221d638783ffbbeb12fc940" gridArea="humidity" gradient="linear-gradient(135deg, #e0c3fc, #8ec5fc)" />
+        <DataCard title=" Wind" value={`${data.windSpeed} km/h`} icon="🌬️" gridArea="windSpeed" gradient="linear-gradient(135deg, #c2e59c, #64b3f4)" />
+        <DataCard title=" Health" value={data.cropHealth} highlight icon="🌱" gridArea="cropHealth" gradient="linear-gradient(135deg, #f6d365, #fda085)" />
+        <DataCard title=" Light" value={`${data.sunlight} hrs`} icon="🌞" gridArea="sunlight" gradient="linear-gradient(135deg, #ffecd2, #fcb69f)" />
         <MarketPriceCard data={data} setData={setData} gridArea="marketPrice" />
-        <DataCard title="🌿 Fert" value={data.fertilizer} icon="🌿" gridArea="fertilizer" gradient="linear-gradient(135deg, #d4fc79, #96e6a1)" />
-        <DataCard title="🚰 Irrigate" value={data.irrigation} icon="🚰" gridArea="irrigation" gradient="linear-gradient(135deg, #84fab0, #8fd3f4)" />
+        <DataCard title=" Fert" value={data.fertilizer} icon="https://w7.pngwing.com/pngs/742/422/png-transparent-organic-food-fertilisers-organic-fertilizer-organic-farming-pelletizing-organic-miscellaneous-food-grass.png" gridArea="fertilizer" gradient="linear-gradient(135deg, #d4fc79, #96e6a1)" />
+        <DataCard title=" Irrigate" value={data.irrigation} icon="https://w7.pngwing.com/pngs/321/273/png-transparent-water-pumping-priming-hand-pump-pumpjack-pump-business-water-well-water.png" gridArea="irrigation" gradient="linear-gradient(135deg, #84fab0, #8fd3f4)" />
       </div>
 
       <div style={chartContainerStyle}>
-        <h3 style={chartTitleStyle}>🌦️ Rainfall Trends</h3>
+        <h3 style={chartTitleStyle}> Rainfall Trends</h3>
         <Line
           data={{
             labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
@@ -120,7 +120,7 @@ const MarketPriceCard = ({ data, setData }) => {
 const DataCard = ({ title, value, highlight, icon, gridArea, gradient }) => {
   return (
     <div style={{ ...dataCardStyle, background: gradient, gridArea }}>
-      <div style={{ fontSize: '30px' }}>{icon}</div>
+      <img className="h-8 w-8" src={icon} />
       <h3 style={{ margin: "10px 0", fontSize: "20px", color: "#333" }}>{title}</h3>
       <p style={dataValueStyle}>{value}</p>
     </div>
