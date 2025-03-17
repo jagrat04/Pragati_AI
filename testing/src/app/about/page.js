@@ -29,6 +29,13 @@ export default function Team() {
       image: "https://raw.githubusercontent.com/jagrat04/tempo/refs/heads/main/Rudra.jpg",
       linkedin: "https://linkedin.com/in/rudra",
       github: "https://github.com/rudra",
+    },
+    {
+        name:"abhinandan",
+        role:"Biotech sem-4",
+        image:"https://raw.githubusercontent.com/jagrat04/tempo/refs/heads/main/media/WhatsApp%20Image%202025-03-18%20at%2003.38.37_80acb50f.jpg",
+        linkedin: "https://linkedin.com/in/rudra",
+        github: "https://github.com/rudra",
     }
   ];
 

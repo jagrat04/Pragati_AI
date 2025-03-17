@@ -35,7 +35,7 @@ const Dashboard = () => {
           maize: parseInt(Math.max(1700, Math.min(2300, prev.marketPrice.maize + (Math.random() * 100 - 50)))),
           barley: parseInt(Math.max(1400, Math.min(2000, prev.marketPrice.barley + (Math.random() * 100 - 50)))),
         },
-        irrigation: prev.soilMoisture < 50 ? "Irrigation Needed 🚰" : "Sufficient Moisture ✅",
+        irrigation: prev.soilMoisture < 50 ? "Irrigation Needed" : "Sufficient Moisture ",
       }));
     };
 
@@ -49,15 +49,15 @@ const Dashboard = () => {
       <h1 style={titleStyle}>🌾 Smart Agriculture Dashboard</h1>
 
       <div style={gridStyle}>
-        <DataCard title=" Temp" value={`${data.temperature}°C`} icon="https://w7.pngwing.com/pngs/190/259/png-transparent-digital-thermometer-displaying-37-medical-thermometers-infrared-thermometers-temperature-mercury-in-glass-thermometer-thermometer-miscellaneous-measurement-medical-thermometers.png" gridArea="temperature" gradient="linear-gradient(135deg, #fceabb, #f8b500)" />
-        <DataCard title=" Soil Moisture" value={`${data.soilMoisture}%`} icon="https://www.citypng.com/public/uploads/preview/png-water-realistic-droplets-drops-704081694963422zlbolisjhv.png" gridArea="soilMoisture" gradient="linear-gradient(135deg, #a8edea, #fed6e3)" />
-        <DataCard title=" Humid" value={`${data.humidity}%`} icon="4e6e4d51fc758c8e501b5040380150aa9565c2076221d638783ffbbeb12fc940" gridArea="humidity" gradient="linear-gradient(135deg, #e0c3fc, #8ec5fc)" />
-        <DataCard title=" Wind" value={`${data.windSpeed} km/h`} icon="🌬️" gridArea="windSpeed" gradient="linear-gradient(135deg, #c2e59c, #64b3f4)" />
-        <DataCard title=" Health" value={data.cropHealth} highlight icon="🌱" gridArea="cropHealth" gradient="linear-gradient(135deg, #f6d365, #fda085)" />
-        <DataCard title=" Light" value={`${data.sunlight} hrs`} icon="🌞" gridArea="sunlight" gradient="linear-gradient(135deg, #ffecd2, #fcb69f)" />
+        <DataCard title=" Temp" value={`${data.temperature}°C`} icon="https://raw.githubusercontent.com/jagrat04/tempo/refs/heads/main/media/WhatsApp_Image_2025-03-18_at_03.26.25_2b5790ef-removebg-preview.png" gridArea="temperature" gradient="linear-gradient(135deg, #fceabb, #f8b500)" />
+        <DataCard title=" Soil Moisture" value={`${data.soilMoisture}%`} icon="https://raw.githubusercontent.com/jagrat04/tempo/refs/heads/main/media/WhatsApp_Image_2025-03-18_at_03.26.51_f298c153-removebg-preview.png" gridArea="soilMoisture" gradient="linear-gradient(135deg, #a8edea, #fed6e3)" />
+        <DataCard title=" Humid" value={`${data.humidity}%`} icon="https://raw.githubusercontent.com/jagrat04/tempo/refs/heads/main/media/WhatsApp_Image_2025-03-18_at_03.30.57_639b6bf3-removebg-preview.png" gridArea="humidity" gradient="linear-gradient(135deg, #e0c3fc, #8ec5fc)" />
+        <DataCard title=" Wind" value={`${data.windSpeed} km/h`} icon="https://raw.githubusercontent.com/jagrat04/tempo/refs/heads/main/media/WhatsApp_Image_2025-03-18_at_03.23.35_109d1196-removebg-preview.png" gridArea="windSpeed" gradient="linear-gradient(135deg, #c2e59c, #64b3f4)" />
+        <DataCard title=" Health" value={data.cropHealth} highlight icon="https://raw.githubusercontent.com/jagrat04/tempo/refs/heads/main/media/WhatsApp_Image_2025-03-18_at_01.34.59_e09b6a0a-removebg-preview.png" gridArea="cropHealth" gradient="linear-gradient(135deg, #f6d365, #fda085)" />
+        <DataCard title=" Light" value={`${data.sunlight} hrs`} icon="https://raw.githubusercontent.com/jagrat04/tempo/refs/heads/main/media/813e9acc0988ffdc55c7b05052f1aef6-removebg-preview.png" gridArea="sunlight" gradient="linear-gradient(135deg, #ffecd2, #fcb69f)" />
         <MarketPriceCard data={data} setData={setData} gridArea="marketPrice" />
-        <DataCard title=" Fert" value={data.fertilizer} icon="https://w7.pngwing.com/pngs/742/422/png-transparent-organic-food-fertilisers-organic-fertilizer-organic-farming-pelletizing-organic-miscellaneous-food-grass.png" gridArea="fertilizer" gradient="linear-gradient(135deg, #d4fc79, #96e6a1)" />
-        <DataCard title=" Irrigate" value={data.irrigation} icon="https://w7.pngwing.com/pngs/321/273/png-transparent-water-pumping-priming-hand-pump-pumpjack-pump-business-water-well-water.png" gridArea="irrigation" gradient="linear-gradient(135deg, #84fab0, #8fd3f4)" />
+        <DataCard title=" Fert" value={data.fertilizer} icon="https://raw.githubusercontent.com/jagrat04/tempo/refs/heads/main/media/image-removebg-preview%20(8).png" gridArea="fertilizer" gradient="linear-gradient(135deg, #d4fc79, #96e6a1)" />
+        <DataCard title=" Irrigate" value={data.irrigation} icon="https://raw.githubusercontent.com/jagrat04/tempo/refs/heads/main/media/image-removebg-preview%20(7).png" gridArea="irrigation" gradient="linear-gradient(135deg, #84fab0, #8fd3f4)" />
       </div>
 
       <div style={chartContainerStyle}>
@@ -120,7 +120,7 @@ const MarketPriceCard = ({ data, setData }) => {
 const DataCard = ({ title, value, highlight, icon, gridArea, gradient }) => {
   return (
     <div style={{ ...dataCardStyle, background: gradient, gridArea }}>
-      <img className="h-8 w-8" src={icon} />
+      <img className="h-17 w-17" src={icon} />
       <h3 style={{ margin: "10px 0", fontSize: "20px", color: "#333" }}>{title}</h3>
       <p style={dataValueStyle}>{value}</p>
     </div>
