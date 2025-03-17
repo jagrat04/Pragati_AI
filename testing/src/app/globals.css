@@ -100,3 +100,8 @@ body {
   padding: 15px 20px;
   float: right;
 }
+
+.footer {
+  background-color: white;
+  text-align: center;
+}
