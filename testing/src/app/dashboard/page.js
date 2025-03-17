@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
+import { color } from "framer-motion";
 
 const Dashboard = () => {
   const [data, setData] = useState({
@@ -102,6 +103,7 @@ const MarketPriceCard = ({ data, setData }) => {
     <div style={marketCardStyle}>
       <h3 style={{ margin: "0", fontSize: "20px", color: "#333", marginBottom: '10px' }}>💰 Market Price</h3>
       <select
+        className=" text-black"
         style={dropdownStyle}
         value={data.selectedCrop}
         onChange={(e) => setData((prev) => ({ ...prev, selectedCrop: e.target.value }))}
@@ -133,7 +135,7 @@ const dropdownStyle = {
   marginBottom: "10px",
   borderRadius: "10px",
   border: "1px solid #ddd",
-  backgroundColor: '#f9f9f9'
+  backgroundColor: '#f9f9f9',
 };
 
 const containerStyle = {
