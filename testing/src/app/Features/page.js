@@ -27,7 +27,7 @@ const Features = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <h1 className="text-4xl font-bold text-center text-green-700 mb-6">
-        🚀 AI Agriculture Features
+        🚀 pragatiAI Features
       </h1>
 
       {/* Weather Forecast Section */}
