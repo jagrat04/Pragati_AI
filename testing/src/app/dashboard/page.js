@@ -1,11 +1,10 @@
-"use client";
+'use client';
 
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 
 const Dashboard = () => {
-  // 🟢 State Variables
   const [data, setData] = useState({
     temperature: 28,
     soilMoisture: 55,
@@ -20,27 +19,15 @@ const Dashboard = () => {
     irrigation: "Irrigation Needed 🚰",
   });
 
-  // 🟢 Simulated Data Fetching (Mimicking Backend Response)
   useEffect(() => {
     const fetchData = () => {
       setData((prev) => ({
         ...prev,
         temperature: parseFloat((prev.temperature + (Math.random() * 1.5 - 0.8)).toFixed(1)),
-        soilMoisture: parseFloat(
-          Math.max(40, Math.min(80, prev.soilMoisture + (Math.random() * 3 - 1.5))).toFixed(1)
-        ),
-        humidity: parseFloat(
-          Math.max(50, Math.min(85, prev.humidity + (Math.random() * 2 - 1))).toFixed(1)
-        ),
-        windSpeed: parseFloat(
-          Math.max(2, Math.min(15, prev.windSpeed + (Math.random() * 2 - 1))).toFixed(1)
-        ),
-        rainfall: [
-          ...prev.rainfall.slice(1),
-          parseFloat(
-            Math.max(10, Math.min(40, prev.rainfall[prev.rainfall.length - 1] + (Math.random() * 3 - 1.5))).toFixed(1)
-          ),
-        ],
+        soilMoisture: parseFloat(Math.max(40, Math.min(80, prev.soilMoisture + (Math.random() * 3 - 1.5))).toFixed(1)),
+        humidity: parseFloat(Math.max(50, Math.min(85, prev.humidity + (Math.random() * 2 - 1))).toFixed(1)),
+        windSpeed: parseFloat(Math.max(2, Math.min(15, prev.windSpeed + (Math.random() * 2 - 1))).toFixed(1)),
+        rainfall: [...prev.rainfall.slice(1), parseFloat(Math.max(10, Math.min(40, prev.rainfall[prev.rainfall.length - 1] + (Math.random() * 3 - 1.5))).toFixed(1))],
         sunlight: parseFloat(Math.max(4, Math.min(12, prev.sunlight + (Math.random() * 2 - 1))).toFixed(1)),
         marketPrice: {
           wheat: parseInt(Math.max(1500, Math.min(2500, prev.marketPrice.wheat + (Math.random() * 100 - 50)))),
@@ -52,30 +39,29 @@ const Dashboard = () => {
       }));
     };
 
-    const interval = setInterval(fetchData, 50000);
+    const interval = setInterval(fetchData, 10000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div style={containerStyle}>
+      <div style={backgroundPatternStyle}></div>
       <h1 style={titleStyle}>🌾 Smart Agriculture Dashboard</h1>
 
-      {/* Grid Layout for Key Data */}
       <div style={gridStyle}>
-        <DataCard title="🌡 Temperature" value={`${data.temperature}°C`} />
-        <DataCard title="💧 Soil Moisture" value={`${data.soilMoisture}%`} />
-        <DataCard title="💨 Humidity" value={`${data.humidity}%`} />
-        <DataCard title="🌬 Wind Speed" value={`${data.windSpeed} km/h`} />
-        <DataCard title="🌱 Crop Health" value={data.cropHealth} highlight />
-        <DataCard title="🌞 Sunlight Exposure" value={`${data.sunlight} hours`} />
-        <MarketPriceCard data={data} setData={setData} />
-        <DataCard title="🌿 Fertilizer Recommendation" value={data.fertilizer} />
-        <DataCard title="🚰 Irrigation Suggestion" value={data.irrigation} />
+        <DataCard title="🌡️ Temp" value={`${data.temperature}°C`} icon="🌡️" gridArea="temperature" gradient="linear-gradient(135deg, #fceabb, #f8b500)" />
+        <DataCard title="💧 Soil" value={`${data.soilMoisture}%`} icon="💧" gridArea="soilMoisture" gradient="linear-gradient(135deg, #a8edea, #fed6e3)" />
+        <DataCard title="💨 Humid" value={`${data.humidity}%`} icon="💨" gridArea="humidity" gradient="linear-gradient(135deg, #e0c3fc, #8ec5fc)" />
+        <DataCard title="🌬️ Wind" value={`${data.windSpeed} km/h`} icon="🌬️" gridArea="windSpeed" gradient="linear-gradient(135deg, #c2e59c, #64b3f4)" />
+        <DataCard title="🌱 Health" value={data.cropHealth} highlight icon="🌱" gridArea="cropHealth" gradient="linear-gradient(135deg, #f6d365, #fda085)" />
+        <DataCard title="🌞 Light" value={`${data.sunlight} hrs`} icon="🌞" gridArea="sunlight" gradient="linear-gradient(135deg, #ffecd2, #fcb69f)" />
+        <MarketPriceCard data={data} setData={setData} gridArea="marketPrice" />
+        <DataCard title="🌿 Fert" value={data.fertilizer} icon="🌿" gridArea="fertilizer" gradient="linear-gradient(135deg, #d4fc79, #96e6a1)" />
+        <DataCard title="🚰 Irrigate" value={data.irrigation} icon="🚰" gridArea="irrigation" gradient="linear-gradient(135deg, #84fab0, #8fd3f4)" />
       </div>
 
-      {/* Rainfall Graph */}
       <div style={chartContainerStyle}>
-        <h3 style={chartTitleStyle}>🌦 Rainfall Trends</h3>
+        <h3 style={chartTitleStyle}>🌦️ Rainfall Trends</h3>
         <Line
           data={{
             labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
@@ -83,11 +69,27 @@ const Dashboard = () => {
               {
                 label: "Rainfall (mm)",
                 data: data.rainfall,
-                borderColor: "#2196F3",
-                backgroundColor: "rgba(33, 150, 243, 0.2)",
+                borderColor: "#3498db",
+                backgroundColor: "rgba(52, 152, 219, 0.2)",
                 tension: 0.3,
               },
             ],
+          }}
+          options={{
+            plugins: {
+              legend: {
+                labels: {
+                  font: {
+                    size: 14,
+                  },
+                },
+              },
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
           }}
         />
       </div>
@@ -95,11 +97,10 @@ const Dashboard = () => {
   );
 };
 
-// 🟢 Market Price Component with Dropdown
 const MarketPriceCard = ({ data, setData }) => {
   return (
-    <div style={cardStyle}>
-      <h3 style={{ margin: "0", fontSize: "18px", color: "#444" }}>💰 Market Price</h3>
+    <div style={marketCardStyle}>
+      <h3 style={{ margin: "0", fontSize: "20px", color: "#333", marginBottom: '10px' }}>💰 Market Price</h3>
       <select
         style={dropdownStyle}
         value={data.selectedCrop}
@@ -111,83 +112,154 @@ const MarketPriceCard = ({ data, setData }) => {
           </option>
         ))}
       </select>
-      <p style={dataStyle}>₹{data.marketPrice[data.selectedCrop]} per quintal</p>
+      <p style={marketDataStyle}>₹{data.marketPrice[data.selectedCrop]} per quintal</p>
     </div>
   );
 };
 
-// 🟢 Reusable Data Card Component
-const DataCard = ({ title, value, highlight }) => {
+const DataCard = ({ title, value, highlight, icon, gridArea, gradient }) => {
   return (
-    <div style={{ ...cardStyle, backgroundColor: highlight ? "#ffeb99" : "#fff" }}>
-      <h3 style={{ margin: "0", fontSize: "18px", color: "#444" }}>{title}</h3>
-      <p style={dataStyle}>{value}</p>
+    <div style={{ ...dataCardStyle, background: gradient, gridArea }}>
+      <div style={{ fontSize: '30px' }}>{icon}</div>
+      <h3 style={{ margin: "10px 0", fontSize: "20px", color: "#333" }}>{title}</h3>
+      <p style={dataValueStyle}>{value}</p>
     </div>
   );
 };
 
-// 🌿 Styles
 const dropdownStyle = {
-  padding: "5px",
+  padding: "10px",
   fontSize: "16px",
-  marginBottom: "5px",
+  marginBottom: "10px",
+  borderRadius: "10px",
+  border: "1px solid #ddd",
+  backgroundColor: '#f9f9f9'
 };
 
 const containerStyle = {
-  padding: "20px",
-  fontFamily: "Arial, sans-serif",
+  padding: "30px",
+  fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
   width: "100vw",
   minHeight: "100vh",
-  backgroundColor: "#f4f9f4",
+  background: "#f9f9f9", // Light base
+  backgroundImage: `url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"%3E%3Cg fill-rule="evenodd"%3E%3Cg fill="%23e8f5e9" fill-opacity="0.4"%3E%3Cpath d="M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.41L38.59 40l1.41-1.41L1.41 0H0v1.41z"/%3E%3Cpath d="M0 24.93l2.83-2.83 1.41 1.41L1.41 26.34h-1.41v-1.41zM38.59 0l-2.83 2.83 1.41 1.41L40 1.41V0h-1.41z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')`, // Light texture
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  position: "relative",
+  overflow: "hidden",
+};
+
+const backgroundPatternStyle = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+  zIndex: -1,
+  opacity: 0.1,
+  backgroundImage: `
+    radial-gradient(circle, rgba(144, 238, 144, 0.1) 0%, transparent 40%),
+    radial-gradient(circle, rgba(173, 216, 230, 0.1) 0%, transparent 40%)
+  `,
+  backgroundSize: "400px 400px, 300px 300px",
+  backgroundPosition: "0 0, 100% 100%",
 };
 
 const titleStyle = {
   textAlign: "center",
-  marginBottom: "20px",
-  color: "#2d6a4f",
-  fontSize: "32px",
-  fontWeight: "bold",
+  marginBottom: "30px",
+  color:"#27ae60",
+  fontSize: "36px",
+  fontWeight: "600",
+  letterSpacing: "1px",
 };
 
 const gridStyle = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-  gap: "20px",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gridTemplateRows: "repeat(3, 1fr)",
+  gridTemplateAreas: `
+    "temperature soilMoisture humidity"
+    "windSpeed cropHealth sunlight"
+    "marketPrice fertilizer irrigation"
+  `,
+  gap: "25px",
+  justifyContent: "center",
+  alignItems: "stretch",
+  width: "90%",
+  maxWidth: "1200px",
 };
 
-const cardStyle = {
-  padding: "20px",
-  border: "1px solid #ddd",
-  borderRadius: "10px",
+const dataCardStyle = {
+  padding: "30px",
+  borderRadius: "15px",
   textAlign: "center",
-  backgroundColor: "#fff",
+  boxShadow: "0 8px 16px rgba(0, 0, 0, 0.08)",
+  transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  cursor: "pointer",
+  '&:hover': {
+    transform: 'translateY(-5px)',
+    boxShadow: '0 12px 20px rgba(0, 0, 0, 0.1)'
+  }
 };
 
-const dataStyle = {
-  fontSize: "22px",
-  fontWeight: "bold",
-  color: "#333",
+const marketCardStyle = {
+  padding: "25px",
+  borderRadius: "15px",
+  textAlign: "center",
+  boxShadow: "0 8px 16px rgba(0, 0, 0, 0.08)",
+  transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  cursor: "pointer",
+  backgroundColor: '#f9f9f9',
+  '&:hover': {
+    transform: 'translateY(-5px)',
+    boxShadow: '0 12px 20px rgba(0, 0, 0, 0.1)'
+  }
 };
 
 const chartContainerStyle = {
-  width: "80%",
-  maxWidth: "600px",
-  marginTop: "20px",
-  padding: "20px",
+  width: "100%",
+  maxWidth: "800px",
+  marginTop: "30px",
+  padding: "30px",
   backgroundColor: "#fff",
-  borderRadius: "10px",
-  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+  borderRadius: "15px",
+  boxShadow: "0 8px 16px rgba(0, 0, 0, 0.1)",
   textAlign: "center",
+  gridColumn: "span 2",
+};
+
+const dataValueStyle = {
+  fontSize: "26px",
+  fontWeight: "600",
+  color: "#333",
+  marginTop: "10px",
+};
+
+const marketDataStyle = {
+  fontSize: "24px",
+  fontWeight: "500",
+  color: "#333",
+  marginTop: "10px",
 };
 
 const chartTitleStyle = {
   textAlign: "center",
-  fontSize: "20px",
+  fontSize: "24px",
   color: "#333",
-  marginBottom: "10px",
+  marginBottom: "15px",
+  fontWeight: "500"
 };
 
 export default Dashboard;
