@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-center p-6" >
-      <video autoplay muted loop id="myVideo">
+      <video autoPlay muted loop id="myVideo" className=" fixed left-0 top-0 w-[100%] h-[100%]">
         <source src="rain.mp4" type="video/mp4"></source>
         Your browser does not support HTML5 video.
       </video>
