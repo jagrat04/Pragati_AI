@@ -5,7 +5,7 @@ import Link from "next/link";
 const Header = () => {
   return (
     <header style={headerStyle}>
-      <h1 style={logoStyle}>🌾 pragatiAI</h1>
+      <h1 style={logoStyle}>Ecom</h1>
       <nav style={navStyle}>
         <Link href="/" style={linkStyle}>Home</Link>
         <Link href="/Features" style={linkStyle}>Features</Link>
