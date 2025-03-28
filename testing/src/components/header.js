@@ -21,11 +21,9 @@ const headerStyle = {
   justifyContent: "space-between",
   alignItems: "center",
   padding: "10px 20px",
-  backgroundColor: "rgba(241, 245, 249, 0.8)",
-  borderBottom: "1px solid #ddd",
+  backgroundColor: "transparent",
   position: "fixed",
   width: "100%",
-  backdropFilter: "blur(px)",
   zIndex: 50,
 };
 

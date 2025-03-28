@@ -46,8 +46,8 @@ Regularly check your plants for any new signs of infection. If more black rot le
       <input type="file" accept="image/*" onChange={handleImageUpload} className=" text-black" />
 
       {image && (
-        <div style={{ marginTop: "20px" }}>
-          <img src={image} alt="Uploaded" style={{ width: "200px", borderRadius: "10px" }} />
+        <div style={{ marginTop: "20px" ,display: "flex", justifyContent: "center" }}>
+          <img src={image} alt="Uploaded" style={{ width: "200px", borderRadius: "10px"}} />
         </div>
       )}
 

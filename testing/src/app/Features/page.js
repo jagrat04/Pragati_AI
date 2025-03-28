@@ -31,7 +31,7 @@ const Features = () => {
       </h1>
 
       {/* Weather Forecast Section */}
-      <div className=" bg-gradient-to-l from-[#ffecd2] to-[#fcb69f] shadow-md rounded-lg p-4 text-black" >
+      <div className=" bg-gradient-to-l from-[#ffecd2] to-[#fcb69f] shadow-md rounded-lg p-4 text-black" style={{ textAlign: "center", padding: "20px" , marginTop: "25px"}} >
         <h2 className="text-2xl font-semibold mb-2">🌦 Live Weather Forecast</h2>
         
         {/* Datalist Input */}

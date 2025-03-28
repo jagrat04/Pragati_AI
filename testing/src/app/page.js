@@ -14,9 +14,22 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center text-center p-6 bg-gradient-to-br from-green-600 via-green-300 to-green-100 animate-gradient">
+    <div className="relative flex min-h-screen items-center justify-center text-center p-6">
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-green-800 opacity-30 blur-3xl"></div>
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
+  <video
+    autoPlay
+    loop
+    muted
+    playsInline
+    className="absolute inset-0 w-full h-full object-cover"
+  >
+    <source src="/videoplayback.webm" type="video/webm" />
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+  
 
       {/* Glassmorphism Card */}
       <motion.div 
@@ -46,7 +59,7 @@ export default function Home() {
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
             <Link
               href="/dashboard"
-              className="relative px-8 py-3 bg-blue-500 text-white rounded-xl text-lg font-semibold shadow-lg transition-all duration-300 hover:bg-blue-700 hover:shadow-blue-500/50 align -right-28" 
+              className="relative px-8 py-3 bg-blue-500 text-white rounded-xl text-lg font-semibold shadow-lg transition-all duration-300 hover:bg-blue-700 hover:shadow-blue-500/50 align -right-24" 
             >
               View Dashboard
             </Link>
