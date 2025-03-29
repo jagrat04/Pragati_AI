@@ -5,7 +5,10 @@ import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 import { color } from "framer-motion";
 
+import { useLanguage } from "@/context/LanguageContext";
+
 const Dashboard = () => {
+  const { translations } = useLanguage();
   const [data, setData] = useState({
     temperature: 28,
     soilMoisture: 55,
@@ -47,7 +50,7 @@ const Dashboard = () => {
   return (
     <div style={containerStyle}>
       <div style={backgroundPatternStyle}></div>
-      <h1 style={titleStyle}>🌾 Smart Agriculture Dashboard</h1>
+      <h1 style={titleStyle}>🌾 {translations.dashboard_page}</h1>
 
       <div style={gridStyle}>
         <DataCard title=" Temp" value={`${data.temperature}°C`} icon="https://raw.githubusercontent.com/jagrat04/tempo/refs/heads/main/media/WhatsApp_Image_2025-03-18_at_03.26.25_2b5790ef-removebg-preview.png" gridArea="temperature" gradient="linear-gradient(135deg, #fceabb, #f8b500)" />

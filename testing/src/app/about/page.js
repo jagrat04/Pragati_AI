@@ -1,6 +1,12 @@
+"use client";
+
 import MemberCard from "./components/card";
 
+import { useLanguage } from "@/context/LanguageContext";
+
 export default function Team() {
+  const { translations } = useLanguage();
+
   return (
     <section className="pb-10 pt-20 bg-white lg:pb-20 lg:pt-[120px]">
       <div className="container mx-auto">
@@ -8,14 +14,13 @@ export default function Team() {
           <div className="w-full px-4">
             <div className="mx-auto mb-[60px] max-w-[510px] text-center">
               <span className="mb-2 block text-lg font-semibold text-black">
-                Our Team
+                {translations.team1}
               </span>
               <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-black text-black sm:text-4xl md:text-[40px]">
-                Our Awesome Team
+                {translations.team2}
               </h2>
               <p className="text-base text-body-color text-black">
-                Sigmas Sigmas Sigmas Sigmas Sigmas Sigmas Sigmas 
-                Sigmas Sigmas Sigmas Sigmas Sigmas Sigmas Sigmas
+                {translations.team_info}
               </p>
             </div>
           </div>

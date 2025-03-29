@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 
+import { useLanguage } from "@/context/LanguageContext";
+
 const CNNInputField = () => {
   const [image, setImage] = useState(null);
   const [processing, setProcessing] = useState(false);
   const [comment, setComment] = useState("");
+  const { translations } = useLanguage();
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -40,19 +43,46 @@ Regularly check your plants for any new signs of infection. If more black rot le
   };
 
   return (
-    <div className="bg-gradient-to-l from-[#d4fc79] to-[#96e6a1] shadow-md rounded-lg p-4 text-black " style={{ textAlign: "center", padding: "20px" , marginTop: "25px"}}>
-         <h2 className="text-2xl font-semibold mb-2">Crop image CNN analasys for pest and deficiency</h2>
-      {/* <h2 className="text-black">Upload an Image of crop for analasys</h2> */}
-      <input type="file" accept="image/*" onChange={handleImageUpload} className=" text-black" />
+    <div
+      className="bg-gradient-to-l from-[#d4fc79] to-[#96e6a1] shadow-md rounded-lg p-6 text-black flex flex-col items-center mt-4"
+    >
+      <h2 className="text-2xl font-semibold mb-4 text-center">
+        {translations.analysis}
+      </h2>
 
-      {image && (
-        <div style={{ marginTop: "20px" ,display: "flex", justifyContent: "center" }}>
-          <img src={image} alt="Uploaded" style={{ width: "200px", borderRadius: "10px"}} />
-        </div>
-      )}
+      {/* Drag and Drop / Upload Area */}
+      <label
+        htmlFor="file-upload"
+        className="border-2 border-dashed border-gray-400 rounded-lg p-10 w-full max-w-md flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100 transition"
+      >
+        {image ? (
+          <img
+            src={image}
+            alt="Uploaded Preview"
+            className="w-32 h-32 object-cover rounded-lg"
+          />
+        ) : (
+          <>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Picture_icon_BLACK.svg"
+              alt="Upload Icon"
+              className="w-12 h-12 mb-2 opacity-50"
+            />
+            <p className="text-gray-700">Drag an image here or <span className="text-blue-500 underline">upload a file</span></p>
+          </>
+        )}
+      </label>
 
-      {processing && <p className=" text-black">Processing...</p>}
-      {comment && <p>{comment}</p>}
+      <input
+        id="file-upload"
+        type="file"
+        accept="image/*"
+        onChange={handleImageUpload}
+        className="hidden"
+      />
+
+      {processing && <p className="mt-2 text-black">Processing...</p>}
+      {comment && <p className="mt-2">{comment}</p>}
     </div>
   );
 };
