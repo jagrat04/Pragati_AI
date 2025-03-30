@@ -178,6 +178,7 @@ const titleStyle = {
   fontSize: "36px",
   fontWeight: "600",
   letterSpacing: "1px",
+  marginTop: "15px"
 };
 
 const gridStyle = {

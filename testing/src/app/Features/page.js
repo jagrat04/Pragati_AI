@@ -29,7 +29,7 @@ const Features = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-4xl font-bold text-center text-green-700 mb-6">
+      <h1 className="text-4xl font-bold text-center text-green-700 mb-6 mt-10">
         🚀 pragatiAI {translations.features}
       </h1>
 
