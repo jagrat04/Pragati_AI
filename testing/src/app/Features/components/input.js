@@ -2,12 +2,15 @@
 
 import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import axios from "axios";
+
 
 const CNNInputField = () => {
   const [image, setImage] = useState(null);
   const [processing, setProcessing] = useState(false);
   const [comment, setComment] = useState("");
   const { translations } = useLanguage();
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleImageProcessing = () => {
     setProcessing(true);
@@ -33,17 +36,28 @@ Regularly check your plants for any new signs of infection. If more black rot le
     }, 2000);
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImage(reader.result);
-        handleImageProcessing();
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+  
+    setImage(URL.createObjectURL(file)); // Show preview immediately
+  
+    const formData = new FormData();
+    formData.append("file", file); // ✅ Use 'file' instead of 'selectedFile'
+  
+    try {
+      const response = await axios.post("http://localhost:3000/input", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+  
+      console.log("Upload success:", response.data);
+      alert("Image uploaded successfully!");
+    } catch (error) {
+      console.error("Upload failed:", error);
+      alert("Failed to upload image.");
     }
   };
+  
 
   const handleDragOver = (event) => {
     event.preventDefault();
