@@ -28,7 +28,7 @@ export default function Home() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/videoplayback.webm" type="video/webm" />
+          <source src="/videoplayback (1).mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
