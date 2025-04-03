@@ -9,6 +9,7 @@ import { useLanguage } from "@/context/LanguageContext";
 
 const Dashboard = () => {
   const { translations } = useLanguage();
+  
   const [data, setData] = useState({
     temperature: 28,
     soilMoisture: 55,
@@ -24,28 +25,51 @@ const Dashboard = () => {
   });
 
   useEffect(() => {
-    const fetchData = () => {
-      setData((prev) => ({
-        ...prev,
-        temperature: parseFloat((prev.temperature + (Math.random() * 1.5 - 0.8)).toFixed(1)),
-        soilMoisture: parseFloat(Math.max(40, Math.min(80, prev.soilMoisture + (Math.random() * 3 - 1.5))).toFixed(1)),
-        humidity: parseFloat(Math.max(50, Math.min(85, prev.humidity + (Math.random() * 2 - 1))).toFixed(1)),
-        windSpeed: parseFloat(Math.max(2, Math.min(15, prev.windSpeed + (Math.random() * 2 - 1))).toFixed(1)),
-        rainfall: [...prev.rainfall.slice(1), parseFloat(Math.max(10, Math.min(40, prev.rainfall[prev.rainfall.length - 1] + (Math.random() * 3 - 1.5))).toFixed(1))],
-        sunlight: parseFloat(Math.max(4, Math.min(12, prev.sunlight + (Math.random() * 2 - 1))).toFixed(1)),
-        marketPrice: {
-          wheat: parseInt(Math.max(1500, Math.min(2500, prev.marketPrice.wheat + (Math.random() * 100 - 50)))),
-          rice: parseInt(Math.max(1800, Math.min(2800, prev.marketPrice.rice + (Math.random() * 100 - 50)))),
-          maize: parseInt(Math.max(1700, Math.min(2300, prev.marketPrice.maize + (Math.random() * 100 - 50)))),
-          barley: parseInt(Math.max(1400, Math.min(2000, prev.marketPrice.barley + (Math.random() * 100 - 50)))),
-        },
-        irrigation: prev.soilMoisture < 50 ? "Irrigation Needed" : "Sufficient Moisture ",
-      }));
+    const defaultValues = {
+      temperature: 28 + Math.random() * 5 - 2.5,  // Random ±2.5°C
+      soilMoisture: 50 + Math.random() * 20 - 10, // Random 40-60%
+      humidity: 65 + Math.random() * 10 - 5,      // Random 60-70%
+      windSpeed: 8 + Math.random() * 4 - 2,       // Random 6-10 km/h
+      rainfall: [10, 15, 20, 18, 25, 22, 30],    // Pre-set pattern
+      cropHealth: "Healthy",
+      sunlight: 6 + Math.random() * 2 - 1,       // Random 5-7 hrs
+      marketPrice: { wheat: 1800, rice: 2200, maize: 2000, barley: 1600 },
+      selectedCrop: "wheat",
+      fertilizer: "Organic Compost",
+      irrigation: "Sufficient Moisture",
     };
-
-    const interval = setInterval(fetchData, 10000);
+  
+    const fetchData = () => {
+      setData((prev) => {
+        // Use default values if no existing value
+        const newData = { ...defaultValues, ...prev };
+  
+        // Simulate some fluctuations
+        newData.temperature = parseFloat((newData.temperature + (Math.random() * 1.5 - 0.8)).toFixed(1));
+        newData.windSpeed = parseFloat(Math.max(2, Math.min(15, newData.windSpeed + (Math.random() * 2 - 1))).toFixed(1));
+        newData.humidity = parseFloat(Math.max(50, Math.min(85, newData.humidity + (Math.random() * 2 - 1))).toFixed(1));
+        newData.soilMoisture = parseFloat(Math.max(30, Math.min(85, newData.soilMoisture + newData.rainfall[newData.rainfall.length - 1] * 0.1 - newData.temperature * 0.3)).toFixed(1));
+        newData.rainfall = [...newData.rainfall.slice(1), parseFloat(Math.max(10, Math.min(40, newData.rainfall[newData.rainfall.length - 1] + (Math.random() * 3 - 1.5))).toFixed(1))];
+  
+        // Update Crop Health
+        newData.cropHealth = newData.soilMoisture < 40 || newData.soilMoisture > 75 ? "At Risk" : "Healthy";
+        if (newData.soilMoisture < 30 || newData.temperature > 38) newData.cropHealth = "Unhealthy";
+  
+        // Fertilizer Suggestion
+        newData.fertilizer = newData.cropHealth === "At Risk" ? "NPK Fertilizer" : "Organic Compost";
+        if (newData.cropHealth === "Unhealthy") newData.fertilizer = "Soil Conditioner";
+  
+        // Irrigation Decision
+        newData.irrigation = newData.soilMoisture < 50 ? "Irrigation Needed" : "Sufficient Moisture";
+  
+        return newData;
+      });
+    };
+  
+    const interval = setInterval(fetchData, 20000);
     return () => clearInterval(interval);
   }, []);
+  
 
   return (
     <div style={containerStyle}>

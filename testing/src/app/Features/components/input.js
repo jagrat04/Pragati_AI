@@ -39,24 +39,41 @@ Regularly check your plants for any new signs of infection. If more black rot le
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
-  
+
     setImage(URL.createObjectURL(file)); // Show preview immediately
-  
+    setComment(""); // Reset any previous comments
+    setProcessing(true);
+
     const formData = new FormData();
-    formData.append("file", file); // ✅ Use 'file' instead of 'selectedFile'
-  
+    formData.append("file", file);
+
     try {
-      const response = await axios.post("http://localhost:3000/input", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-  
-      console.log("Upload success:", response.data);
-      alert("Image uploaded successfully!");
+        // 1️⃣ Upload Image
+        const uploadResponse = await axios.post("http://localhost:3000/input", formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+        });
+
+        console.log("Upload success:", uploadResponse.data);
+        const { image_id } = uploadResponse.data;
+
+        // 2️⃣ Fetch Processed Result
+        const processResponse = await axios.get(`http://localhost:3000/process/${image_id}`);
+        console.log("Processing result:", processResponse.data);
+
+        // 3️⃣ Fetch AI Explanation from Gemini
+        const responseResponse = await axios.post(`http://localhost:3000/response/${image_id}`);
+        console.log("AI-generated response:", responseResponse.data);
+
+        // 4️⃣ Display AI Response
+        setComment(responseResponse.data.response_text || "No explanation available.");
     } catch (error) {
-      console.error("Upload failed:", error);
-      alert("Failed to upload image.");
+        console.error("Error:", error);
+        alert("Something went wrong.");
+    } finally {
+        setProcessing(false);
     }
-  };
+};
+
   
 
   const handleDragOver = (event) => {
